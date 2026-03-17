@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
-import {DB_NAME} from "../constant.js"
-import express from 'express'
-
-const app = express()
+import { DB_NAME } from "../constant.js"
 
 
 const connectDB = async () => {
@@ -10,8 +7,8 @@ const connectDB = async () => {
     const connetionInstance = await mongoose.connect(`${process.env.MONGODB_URL}/${DB_NAME}`)
     console.log(`mongoDb connectd || db host ${connetionInstance.connection.host}`)
   } catch (error) {
-console.log("Error ", error)
-process.exit(1)
+    console.log("Error ", error)
+    process.exit(1)
   }
 }
 
