@@ -19,6 +19,8 @@ const uplaodOnCloudinary = async (localFilePath) => {
     return response
   } catch (error) {
     fs.unlinkSync(localFilePath)// remove url from the temp file
-    
+
   }
 }
+
+export { uplaodOnCloudinary }
