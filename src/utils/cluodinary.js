@@ -1,26 +1,27 @@
-import multer from 'multer'
 import { v2 as cloudinary } from 'cloudinary'
 import fs from 'fs'
 
 cloudinary.config({
-  CLUOD_NAME: process.env.CLUOD_API_KEY,
-  cloud_Secret_key: process.env.CLUOD_API_KEY,
-  cloud_api_key: process.env.CLUOD_API_KEY
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET
 })
 
-const uplaodOnCloudinary = async (localFilePath) => {
+const uploadOnCloudinary = async (localFilePath) => {
   try {
     if (!localFilePath) return null
+
     const response = await cloudinary.uploader.upload(localFilePath, {
       resource_type: 'auto'
     })
-    // file has been uplaoded on cloudinary
-    console.log('file has been uplaoded on cloudinary', response.url)
-    return response
-  } catch (error) {
-    fs.unlinkSync(localFilePath)// remove url from the temp file
 
+    console.log("File uploaded to cloudinary", response.url)
+    return response
+
+  } catch (error) {
+    fs.unlinkSync(localFilePath)
+    return null
   }
 }
 
-export { uplaodOnCloudinary }
+export { uploadOnCloudinary }
